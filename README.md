@@ -26,7 +26,7 @@
   npm i
   ```
 
-  To install insomnia:  
+  To download Insomnia:  
 
  [Download Insomnia](https://insomnia.rest/download)
 
