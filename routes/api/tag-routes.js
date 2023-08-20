@@ -1,10 +1,10 @@
-const router = require('express').Router();
-const { Tag, Product, ProductTag } = require('../../models');
+const router = require('express').Router(); //Import router
+const { Tag, Product, ProductTag } = require('../../models'); //Import Tag, Product and ProductTag models
 
 // The `/api/tags` endpoint
 
 router.get('/', async (req, res) => {
-  // find all tags
+  // Find all tags
   try {
     const tagData = await Tag.findAll({
       include: [{ model: Product }],
@@ -17,12 +17,12 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/:id', async (req, res) => {
-  // find a single tag by its `id`
+  // Find a single tag by its `id`
   try {
     const tagData = await Tag.findByPk(req.params.id, {
       include: [{ model: Product }],
     });
-
+    // Handle scenario for when id does not exist
     if (!tagData) {
       res.status(404).json({ message: 'No tag with that id found!' });
       return;
@@ -35,7 +35,7 @@ router.get('/:id', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-  // create a new tag
+  // Create a new tag
   try {
     const tagData = await Tag.create(req.body);
     res.status(201).json(tagData);
@@ -46,13 +46,14 @@ router.post('/', async (req, res) => {
 });
 
 router.put('/:id', async (req, res) => {
-  // update a tag's name by its `id` value
+  // Update a tag's name by its `id` value
   try {
-    const tagData = await Tag.update(req.body,{
+    const tagData = await Tag.update(req.body, {
       where: {
         id: req.params.id,
       },
     });
+    // Handle scenario for when id does not exist
     if (!tagData) {
       res.status(404).json({ message: 'No tag with that id found!' });
       return;
@@ -65,13 +66,14 @@ router.put('/:id', async (req, res) => {
 });
 
 router.delete('/:id', async (req, res) => {
-  // delete on tag by its `id` value
+  // Delete on tag by its `id` value
   try {
     const tagData = await Tag.destroy({
       where: {
         id: req.params.id,
       },
     });
+    // Handle scenario for when id does not exist
     if (!tagData) {
       res.status(404).json({ message: 'No tag with that id found!' });
       return;
@@ -83,4 +85,5 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+// Export router
 module.exports = router;

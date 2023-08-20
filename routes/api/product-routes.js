@@ -1,5 +1,5 @@
-const router = require('express').Router();
-const { Product, Category, Tag, ProductTag } = require('../../models');
+const router = require('express').Router(); // Import router
+const { Product, Category, Tag, ProductTag } = require('../../models'); // Import Product, Category, Tag and ProductTag models
 
 // The `/api/products` endpoint
 
@@ -25,6 +25,7 @@ router.get('/:id', async (req, res) => {
     const productData = await Product.findByPk(req.params.id, {
       include: [{ model: Category }, { model: Tag }],
     });
+    // Handle scenario for when id does not exist
     if (!productData) {
       res.status(404).json({ message: 'No product found with that id!' });
       return;
@@ -38,14 +39,6 @@ router.get('/:id', async (req, res) => {
 
 // create new product
 router.post('/', (req, res) => {
-  /* req.body should look like this...
-    {
-      product_name: "Basketball",
-      price: 200.00,
-      stock: 3,
-      tagIds: [1, 2, 3, 4]
-    }
-  */
   Product.create(req.body)
     .then((product) => {
       // if there's product tags, we need to create pairings to bulk create in the ProductTag model
@@ -82,7 +75,7 @@ router.put('/:id', (req, res) => {
         ProductTag.findAll({
           where: { product_id: req.params.id }
         }).then((productTags) => {
-          // create filtered list of new tag_ids
+          // Create filtered list of new tag_ids
           const productTagIds = productTags.map(({ tag_id }) => tag_id);
           const newProductTags = req.body.tagIds
             .filter((tag_id) => !productTagIds.includes(tag_id))
@@ -93,11 +86,11 @@ router.put('/:id', (req, res) => {
               };
             });
 
-          // figure out which ones to remove
+          // Figure out which ones to remove
           const productTagsToRemove = productTags
             .filter(({ tag_id }) => !req.body.tagIds.includes(tag_id))
             .map(({ id }) => id);
-          // run both actions
+          // Run both actions
           return Promise.all([
             ProductTag.destroy({ where: { id: productTagsToRemove } }),
             ProductTag.bulkCreate(newProductTags),
@@ -114,13 +107,14 @@ router.put('/:id', (req, res) => {
 });
 
 router.delete('/:id', async (req, res) => {
-  // delete one product by its `id` value
+  // Delete one product by its `id` value
   try {
     const productData = await Product.destroy({
       where: {
         id: req.params.id,
       },
     });
+    // Handle scenario for when id does not exist
     if (!productData) {
       res.status(404).json({ message: 'No product found with that id!' });
       return;
@@ -132,4 +126,5 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+// Export router
 module.exports = router;
