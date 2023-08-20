@@ -39,7 +39,11 @@
    ```
    and enter your `MySQL` password to access `MySQL` shell
 
-   type `quit` to quit `MySQL` shell
+   then type:
+   ```
+   quit
+   ``` 
+   this will quit `MySQL` shell
 
    Then run:
    ```
