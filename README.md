@@ -39,19 +39,19 @@
    ```
    and enter your `MySQL` password to access `MySQL` shell
 
-   then type:
+   type:
    ```
    quit
    ``` 
    this will quit `MySQL` shell
 
-   Then run:
+   Run:
    ```
    source db/schema.sql
    ```
    this will run the `schema.sql` file in the `db` folder
    
-  Run:
+  Then run:
    ```
    npm run seed 
    ```
