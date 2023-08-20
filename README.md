@@ -39,6 +39,8 @@
    ```
    and enter your `MySQL` password to access `MySQL` shell
 
+   type `quit` to quit `MySQL` shell
+
    Then run:
    ```
    source db/schema.sql
