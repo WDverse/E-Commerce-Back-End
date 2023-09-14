@@ -2,7 +2,7 @@
 
   ## Description
 
-  This is a backend application built for an e-commerce site, using Node.js, Express.js, MySQL and Sequelize. The application allows the user to view,post, update and delete items in the e-commerce databse using Insomnia.
+  This is a backend application built for an e-commerce site, using Node.js, Express.js, MySQL and Sequelize. The application allows the user to view,post, update and delete items in the e-commerce database using Insomnia.
 
 
   ## Table of Contents
