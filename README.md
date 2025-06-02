@@ -73,12 +73,7 @@ Open `Insomnia` and use the respective API routes to `GET`, `POST`, `UPDATE` or 
 
   AskBCS tutors  
 
-  W3Schools  
-
-  Course material  
-
-  Added comments with the help of ChatGPT
-
+  W3Schools   
 
   ## Tests
 
